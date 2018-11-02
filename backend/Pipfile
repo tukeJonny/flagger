@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+djangorestframework-jwt = "*"
+django-filter = "*"
+gunicorn = "*"
+mysqlclient = "*"
+django-constance = {extras = ["database"], version = "*"}
+structlog = "*"
+
+[dev-packages]
+django-nose = "*"
+django-extensions = "*"
+factory-boy = "*"
+ipython = "*"
+
+[requires]
+python_version = "3.6"
+
+[scripts]
+run = "python manage.py runserver"
+seeddb = "./scripts/seeddb.sh"

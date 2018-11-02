@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  flagger:
+    build: ./backend
+    environments:
+      DJANGO_SETTINGS_MODULE: "backend.settings.prod"
+      FLAGGER_ALLOWED_HOSTS_CSV: "*" # Please change here for production.
+      FLAGGER_MYSQL_HOSTNAME: "mysql"
+      FLAGGER_MYSQL_USERNAME: "flaggeruser"
+      FLAGGER_MYSQL_PASSWORD: "flaggerpass"
+    links:
+      - mysql
+      - mysql:mysql
+
+  mysql:
+    image: mysql:5.7
+    environments:
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
+      MYSQL_DATABASE: "flagger"
+      MYSQL_USER: "flaggeruser"
+      MYSQL_PASSWORD: "flaggerpass"
+
