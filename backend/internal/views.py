@@ -9,7 +9,7 @@ User = get_user_model()
 
 from rest_framework import routers
 from rest_framework import generics, viewsets, mixins, status, permissions
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_jwt import authentication as jwt_authentication
 
 from scoreserver import models, serializers
@@ -18,6 +18,7 @@ from scoreserver.permissions import IsCTFOpened, IsCTFEnded
 router = routers.SimpleRouter()
 
 class UserRankingViewSet(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated, IsAdminUser)
 
     def list(self, request):
         ranking = models.SolveLog.objects.get_user_ranking()
